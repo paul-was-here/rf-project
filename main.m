@@ -2,10 +2,13 @@
 % BIOENG 1005
 % Paul Kullmann
 
-[E, H] = main_fcn;
-plot(E); hold on;
-yyaxis right;
-plot(H);
+figure();
+xline(501,'k--'); hold on;
+t = text(501, 0.5, 'Interface 1');
+t.Rotation = 90;
+main_fcn();
+
+
 
 function [E, H] = main_fcn()
     
@@ -16,7 +19,7 @@ function [E, H] = main_fcn()
     t_step = 2.5e-11;
     z_step = 1.5e-2;
 
-    num_time_steps = numel(0:t_step:22.5e-9);
+    num_time_steps = numel(0:t_step:100e-9);
     num_z_steps = 1000;
 
 
@@ -48,11 +51,24 @@ function [E, H] = main_fcn()
         end
 
         %% Source:
-        E(5) = E(5) + source(t);
+        E(5) = source(t);
 
 
         %% Boundary Conditions:
-        E(num_z_steps) = 0;
+        E(end) = 0;
+
+        cla;
+        plot(E); hold on; 
+        xline(501,'k--');
+        xline(601, 'k--');
+        ylim([-1 1])
+        yyaxis right;
+        cla;
+        plot(H); 
+        ylim([-1 1])
+        yyaxis left;
+        pause(0.005)
+
 
     end
 end
