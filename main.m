@@ -51,7 +51,7 @@ function [E, H] = main_fcn()
         end
 
         %% Source:
-        E(5) = source(t);
+        E(1) = source(t);
 
 
         %% Boundary Conditions:
